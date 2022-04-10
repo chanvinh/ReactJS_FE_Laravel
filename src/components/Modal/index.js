@@ -66,7 +66,7 @@ const Modal = (props) => {
 
   const history = useNavigate();
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem("user-info-people-DN")).id) {
+    if (localStorage.getItem("user-info-people-DN")) {
       history("/user/account");
     }
   }, []);
