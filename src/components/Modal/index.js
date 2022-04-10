@@ -65,11 +65,11 @@ const Modal = (props) => {
   }
 
   const history = useNavigate();
-  // useEffect(() => {
-  //   if (JSON.parse(localStorage.getItem("user-info-people-DN")).id) {
-  //     history("/user/account");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (JSON.parse(localStorage.getItem("user-info-people-DN")).id) {
+      history("/user/account");
+    }
+  }, []);
 
   async function login() {
     let item = { email, password };
