@@ -6,9 +6,12 @@ const HeaderTop = (props) => {
   const { toggleDropUser, toggleLanguage, activeUserDN } = props;
 
   const [data, setData] = useState([]);
-  const { id } = useParams();
+
   useEffect(async () => {
-    let reuslt = await fetch("http://localhost:8000/api/user/" + id);
+    let reuslt = await fetch(
+      "http://localhost:8000/api/user/" +
+        JSON.parse(localStorage.getItem("user-info-people-DN")).id
+    );
     reuslt = await reuslt.json();
     setData(reuslt);
     console.log(reuslt);

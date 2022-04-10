@@ -201,7 +201,7 @@
       }
     }
     .nav__User {
-      padding: 4rem 0px;
+      padding: 2rem 0px;
       .User__Edit {
         padding: 1rem;
         background-color: #fff;
@@ -394,6 +394,56 @@
             margin: 0px 10px;
             color: #5e5e5e;
             cursor: pointer;
+          }
+        }
+      }
+      .user__Name {
+        font-size: 20px;
+        font-weight: bolder;
+        text-transform: uppercase;
+        color: #5e5e5e;
+      }
+      .user__Table {
+        margin: 20px 0px;
+        table {
+          width: 100%;
+          thead {
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            tr {
+              display: grid;
+              padding: 15px 0px;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+              th {
+                font-weight: bolder;
+                  font-size: 16px;
+                  text-align: center;
+                  color: #5e5e5e;
+                  border-right: 1px solid rgba(0, 0, 0, 0.1);
+                  padding: 0px 20px;
+              }
+
+            }
+          }
+          tbody {
+            tr {
+              padding: 15px 0px;
+              border: 1px solid rgba(0, 0, 0, 0.1);
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+              &:nth-of-type(odd) {
+                background-color: rgba(0, 0, 0, 0.05);
+              }
+              th {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+              img {
+                width: 100px;
+                height: 100px;
+                object-fit: cover;
+              }
+            }
           }
         }
       }

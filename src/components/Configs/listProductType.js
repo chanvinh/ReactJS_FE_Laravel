@@ -14,12 +14,6 @@ const listProductType = [
     name: "Quản lý hãng",
   },
   {
-    id: 3,
-    link: "type3",
-    icon: <i class="fa-solid fa-database"></i>,
-    name: "Quản lý danh mục",
-  },
-  {
     id: 4,
     link: "search",
     icon: <i class="fa-solid fa-magnifying-glass"></i>,

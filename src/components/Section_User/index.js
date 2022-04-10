@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import ListMenuUser from "../Configs/ListMenuUser";
 import avatar from "../../images/avatar.jpg";
+import { toast } from "react-toastify";
 
 const Section_User = (props) => {
   const { checkUX, activeUX, checkHeader } = props;
@@ -10,10 +11,19 @@ const Section_User = (props) => {
   const user = JSON.parse(localStorage.getItem("user-info-people-DN"));
 
   async function logOut() {
-    localStorage.clear(user);
+    localStorage.clear();
     document.querySelector(".Modal-full").classList.remove("falseUser");
     document.querySelector("body").style = "overflow:hidden";
     history("/");
+    toast.success("Đăng xuất thành công", {
+      position: "top-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   const [data1, setData1] = useState([]);

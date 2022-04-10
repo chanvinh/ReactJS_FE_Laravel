@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "../../scss/Modal.scss";
 import banner from "../../images/banner (1).png";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axiosClient from "../../api/axiosClient";
 
 const Modal = (props) => {
   const { toggleCloseUser } = props;
@@ -44,15 +46,6 @@ const Modal = (props) => {
   }, []);
 
   async function DangKy() {
-    // let item = {
-    //   email,
-    //   phone,
-    //   address,
-    //   password,
-    //   name,
-    //   random_code,
-    //   avatar,
-    // };
     const formData = new FormData();
     formData.append("email", email);
     formData.append("phone", phone);
@@ -63,10 +56,6 @@ const Modal = (props) => {
     formData.append("avatar", avatar);
     let result = await fetch("http://localhost:8000/api/register", {
       method: "POST",
-      // headers: {
-      //   "Content-Type": "application/json",
-      //   Accept: "application/json",
-      // },
       body: formData,
     });
     result = await result.json();
@@ -76,11 +65,11 @@ const Modal = (props) => {
   }
 
   const history = useNavigate();
-  useEffect(() => {
-    if (localStorage.getItem("user-info-people-DN")) {
-      history("/user/account");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (JSON.parse(localStorage.getItem("user-info-people-DN")).id) {
+  //     history("/user/account");
+  //   }
+  // }, []);
 
   async function login() {
     let item = { email, password };
@@ -93,10 +82,36 @@ const Modal = (props) => {
       body: JSON.stringify(item),
     });
     result = await result.json();
-    localStorage.setItem("user-info-people-DN", JSON.stringify(result));
-    document.querySelector(".Modal-full").classList.add("falseUser");
-    document.querySelector("body").style = null;
-    history("/user/account");
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("password", password);
+    axiosClient.post("/login", formData).then((res) => {
+      if (res.data.status === 202) {
+        toast.error("Đăng nhập thất bại", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } else {
+        localStorage.setItem("user-info-people-DN", JSON.stringify(result));
+        toast.success("Đăng nhập thành công", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        document.querySelector(".Modal-full").classList.add("falseUser");
+        document.querySelector("body").style = null;
+        history("/user/account");
+      }
+    });
   }
 
   return (
